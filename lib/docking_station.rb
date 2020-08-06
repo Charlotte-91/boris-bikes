@@ -11,7 +11,16 @@ def initialize(capacity= DEFAULT_CAPACITY)
 end
   def release_bike
     fail "No bikes available" if @bikes.empty?
-    @bikes.pop
+    #fail 'Bike is broken' if @bikes[@bikes.length-1].broken? == true
+    while true do
+      new_bike = @bikes.pop
+      if new_bike.broken? == true
+        @bikes.unshift(new_bike)
+      else
+       return new_bike
+       break
+      end
+    end
   end
 
   def dock(bike)
